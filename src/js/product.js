@@ -14,10 +14,8 @@ async function addToCartHandler(e) {
   if (!id) return; // defensive guard
 
   const product = await dataSource.findProductById(id);
-  if (!product) {
-    console.error('Product not found for id:', id);
-    return;
-  }
+  if (!product) return;
+  
   addProductToCart(product);
 }
 
