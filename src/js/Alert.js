@@ -24,7 +24,7 @@ export default class Alert {
       const main = document.querySelector('main');
       if (main) main.prepend(section);
     } catch (e) {
-      // Optionally handle errors (e.g., log)
+        // console.error(e);
     }
   }
 }
