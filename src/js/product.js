@@ -7,6 +7,7 @@ function addProductToCart(product) {
   const cart = getLocalStorage('so-cart'); // always an array per your utils
   cart.push(product);
   setLocalStorage('so-cart', cart);
+  updateCartBadge(cart.length);
 }
 // add to cart button event handler
 async function addToCartHandler(e) {
@@ -18,6 +19,19 @@ async function addToCartHandler(e) {
 
   addProductToCart(product);
 }
+
+export function updateCartBadge(count) {
+  const badge = document.getElementById('cart-badge');
+  badge.style.display = (count > 0) ? 'flex' : 'none';
+  badge.textContent = count;
+}
+
+// adding listener to when the page is reloaded, to display the correct cart badge information.
+document.addEventListener('DOMContentLoaded', () => {
+  const cartList = getLocalStorage('so-cart') || [];
+  console.log('Main page cartList:', cartList);
+  updateCartBadge(cartList.length);
+});
 
 // add listener to Add to Cart button
 document
