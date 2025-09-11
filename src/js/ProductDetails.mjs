@@ -16,7 +16,7 @@ export default class ProductDetails {
     }
     addProductToCart(product) {
         const cart = getLocalStorage('so-cart'); // always an array per your utils
-        cart.push(product);
+        cart.push(this.product);
         setLocalStorage('so-cart', cart);
     }
     renderProductDetails() {

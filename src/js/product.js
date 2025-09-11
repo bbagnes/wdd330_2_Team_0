@@ -21,7 +21,7 @@ async function addToCartHandler(e) {
   const product = await dataSource.findProductById(id);
   if (!product) return;
 
-  addProductToCart(product);
+  product.addProductToCart(product);
 }
 
 // add listener to Add to Cart button
