@@ -11,12 +11,3 @@ const productDetails = new ProductDetails(productId, dataSource);
 productDetails.init();
 
 // console.log(dataSource.findProductById(productId));
-
-// add to cart button event handler
-async function addToCartHandler(e) {
-  const id = e.target.dataset.id;
-  if (!id) return; // defensive guard
-
-  const product = await dataSource.findProductById(id);
-  if (!product) return;
-}
