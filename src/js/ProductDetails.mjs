@@ -17,7 +17,7 @@ export default class ProductDetails {
         //ensure badge correct on load
         updateCartBadge();
     }
-    addProductToCart(product) {
+    addProductToCart() {
         const cart = getLocalStorage('so-cart'); // always an array per your utils
         cart.push(this.product);
         setLocalStorage('so-cart', cart);
