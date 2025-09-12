@@ -1,5 +1,12 @@
-import { updateCartBadge } from './product.js';
-import { getLocalStorage } from './utils.mjs';
+import ProductData from './ProductData.mjs';
+import { updateCartBadge } from './product.js';;
 
-const cart = getLocalStorage('so-cart') || [];
-updateCartBadge(cart.length);
+
+const dataSource = new ProductData('tents');
+
+// (optional test)
+dataSource.getData().then(data => console.log('tents:', data));
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateCartBadge();
+});
