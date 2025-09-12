@@ -51,9 +51,7 @@ export function renderListWithTemplate(
       : parentElement;
 
   if (!parent) return;
-
   if (clear) parent.innerHTML = '';
-
   if (!Array.isArray(list) || list.length === 0) {
     parent.insertAdjacentHTML(position, '<p>No products found.</p>');
     return;

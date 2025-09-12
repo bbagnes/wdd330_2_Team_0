@@ -40,14 +40,14 @@ export default class ProductList {
         this.renderList(this.products);
     }
     
-    renderList(products) {
-    if (!this.listElement) return;
-    renderListWithTemplate(
-        productCardTemplate, // your top-level template function
-        this.listElement,    // where to render
-        products,            // data
-        'afterbegin',        // position (default is fine)
-        true                 // clear existing content (replaces innerHTML approach)
-      );
-    }
+  renderList(products) {
+  if (!this.listElement) return;
+  renderListWithTemplate(
+      productCardTemplate, // your top-level template function
+      this.listElement,    // where to render
+      products,            // data
+      'afterbegin',        // position (default is fine)
+      true                 // clear existing content (replaces innerHTML approach)
+    );
+  }
 }
