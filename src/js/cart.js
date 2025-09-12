@@ -56,7 +56,7 @@ function getCartTotal(cart) {
   return cart.reduce((sum, item) => {
     const qty = Number(item?.quantity ?? 1);
     const price = coercePrice(
-      item?.FinalPrice ?? item?.price ?? item?.Price ?? item?.ListPrice
+      item?.FinalPrice ?? item?.price ?? item?.Price ?? item?.ListPrice,
     );
     return sum + price * (Number.isFinite(qty) ? qty : 1);
   }, 0);
@@ -74,8 +74,10 @@ function coercePrice(value) {
 
 function formatCurrency(amount) {
   try {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
-      .format(amount);
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(amount);
   } catch {
     return `$${amount.toFixed(2)}`;
   }
