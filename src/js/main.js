@@ -12,11 +12,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     const dataSource = new ProductData('tents');
     const list = new ProductList('tents', dataSource, '.product-list');
     await list.init();
-
-//export const dataSource = new ProductData('tents');
-
-//document.addEventListener('DOMContentLoaded', async () => {
-    //updateCartBadge();
-  //const list = new ProductList('tents', dataSource, '.product-list'); // or pass the element
-  //await list.init();
 });
