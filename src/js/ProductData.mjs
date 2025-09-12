@@ -15,9 +15,9 @@ export default class ProductData {
     return fetch(this.path)
       .then(convertToJson);
   }
+
   async findProductById(id) {
     const products = await this.getData();
-    const target = String(id ?? '').trim().toUpperCase();
-    return products.find((item) => String(item.Id).trim().toUpperCase === target);
+    return products.find((item) => item.Id === id);
   }
 }
