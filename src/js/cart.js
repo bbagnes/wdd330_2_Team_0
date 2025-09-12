@@ -1,5 +1,5 @@
 import { getLocalStorage } from './utils.mjs';
-import { updateCartBadge } from './product.js'
+import { updateCartBadge } from './product.js';
 
 function renderCartContents() {
   const cartItems = getLocalStorage('so-cart');
@@ -31,10 +31,10 @@ function cartItemTemplate(item) {
   <p class='cart-card__price'>$${Number(item.FinalPrice).toFixed(2)}</p>
 </li>`;
 
-return newItem;
+  return newItem;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  updateCartBadge();   // ensure correct on initial load
+  updateCartBadge(); // ensure correct on initial load
   renderCartContents();
 });
