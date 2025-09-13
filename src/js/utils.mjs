@@ -21,15 +21,42 @@ export function setLocalStorage(key, data) {
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener('touchend', (event) => {
+  const el = qs(selector);
+  if (!el) return;
+  el.addEventListener('touchend', (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener('click', callback);
+  el.addEventListener('click', callback);
 }
+
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get(param);
   return product
+}
+
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = 'afterbegin',
+  clear = false
+) {
+  // allow selector string or element
+  const parent =
+    typeof parentElement === 'string'
+      ? document.querySelector(parentElement)
+      : parentElement;
+
+  if (!parent) return;
+  if (clear) parent.innerHTML = '';
+  if (!Array.isArray(list) || list.length === 0) {
+    parent.insertAdjacentHTML(position, '<p>No products found.</p>');
+    return;
+  }
+
+  const htmlStrings = list.map(templateFn);
+  parent.insertAdjacentHTML(position, htmlStrings.join(''));
 }
