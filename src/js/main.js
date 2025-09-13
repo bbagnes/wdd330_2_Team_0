@@ -11,3 +11,4 @@ document.addEventListener('DOMContentLoaded', async () => {
   // build and render the product list
   const dataSource = new ProductData('tents');
   const list = new ProductList('tents', dataSource, '.product-list');
+});
