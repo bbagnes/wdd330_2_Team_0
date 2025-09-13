@@ -281,6 +281,29 @@ button {
   grid-column: 3;
 }
 
+.hide {
+  display: none !important;
+}
+
+/* make the footer align to the right under the price column */
+.cart-footer {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: flex-end;
+  /* ⬅️ push content to the right */
+}
+
+.cart-total {
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: right;
+  /* ⬅️ text itself is right-aligned */
+  min-width: 180px;
+  /* optional: keeps it tidy in a small block */
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

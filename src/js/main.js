@@ -12,4 +12,3 @@ document.addEventListener('DOMContentLoaded', async () => {
   const dataSource = new ProductData('tents');
   const list = new ProductList('tents', dataSource, '.product-list');
   await list.init();
-});
