@@ -19,6 +19,8 @@ function renderCartContents() {
 }
 
 function cartItemTemplate(item) {
+  const FinalPrice = Number(item.FinalPrice); // Simple number conversion
+  const discountPrice = FinalPrice * 0.10; // 10% of FinalPrice
   const newItem = `<li class='cart-card divider'>
   <a href='#' class='cart-card__image'>
     <img
@@ -31,8 +33,7 @@ function cartItemTemplate(item) {
   </a>
   <p class='cart-card__color'>${item.Colors?.[0]?.ColorName ?? ''}</p>
   <p class='cart-card__quantity'>qty: 1</p>
-  <p class='cart-card__price'>$${Number(item.FinalPrice).toFixed(2)}</p>
-</li>`;
+<p class='cart-card__price'>$${FinalPrice.toFixed(2)}<br>10% Discount Amount: $${discountPrice.toFixed(2)}</p></li>`;
 
   return newItem;
 }
@@ -40,6 +41,7 @@ function cartItemTemplate(item) {
 function updateCartFooter(cart) {
   const footerEl = document.getElementById('cart-footer');
   const totalEl = document.getElementById('cart-total');
+  const discountEl = document.getElementById('discount')
 
   // If the footer HTML doesn't exist yet, do nothing (keeps this file safe to include anywhere)
   if (!footerEl || !totalEl) return;
@@ -47,12 +49,17 @@ function updateCartFooter(cart) {
   if (!Array.isArray(cart) || cart.length === 0) {
     footerEl.classList.add('hide');
     totalEl.textContent = '$0.00';
+    discountEl.textContent = '';
     return;
   }
 
   const total = getCartTotal(cart);
   totalEl.textContent = formatCurrency(total);
   footerEl.classList.remove('hide');
+
+  // Add 10% discount display
+  const discount = total * 0.10;
+  discountEl.textContent = `Discount: ${formatCurrency(total - discount)}`;
 }
 
 function getCartTotal(cart) {
@@ -63,6 +70,7 @@ function getCartTotal(cart) {
     );
     return sum + price * (Number.isFinite(qty) ? qty : 1);
   }, 0);
+
 }
 
 function coercePrice(value) {
