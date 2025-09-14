@@ -20,7 +20,7 @@ function renderCartContents() {
 
 function cartItemTemplate(item) {
   const FinalPrice = Number(item.FinalPrice); // Simple number conversion
-  const discountPrice = FinalPrice * 0.10; // 10% of FinalPrice
+  const discountPrice = FinalPrice * 0.1; // 10% of FinalPrice
   const newItem = `<li class='cart-card divider'>
   <a href='#' class='cart-card__image'>
     <img
@@ -41,7 +41,7 @@ function cartItemTemplate(item) {
 function updateCartFooter(cart) {
   const footerEl = document.getElementById('cart-footer');
   const totalEl = document.getElementById('cart-total');
-  const discountEl = document.getElementById('discount')
+  const discountEl = document.getElementById('discount');
 
   // If the footer HTML doesn't exist yet, do nothing (keeps this file safe to include anywhere)
   if (!footerEl || !totalEl) return;
@@ -58,7 +58,7 @@ function updateCartFooter(cart) {
   footerEl.classList.remove('hide');
 
   // Add 10% discount display
-  const discount = total * 0.10;
+  const discount = total * 0.1;
   discountEl.textContent = `Discount: ${formatCurrency(total - discount)}`;
 }
 
@@ -70,7 +70,6 @@ function getCartTotal(cart) {
     );
     return sum + price * (Number.isFinite(qty) ? qty : 1);
   }, 0);
-
 }
 
 function coercePrice(value) {
