@@ -13,9 +13,7 @@ productDetails.init();
 // console.log(dataSource.findProductById(productId));
 
 export function updateCartBadge() {
-  console.log("We are getting into the function");
   const cart = getLocalStorage('so-cart') || [];
-  console.log(cart.length)
   const badge = document.querySelector('.cart-count');
   //if (!badge) return;
   badge.textContent = cart.length;
