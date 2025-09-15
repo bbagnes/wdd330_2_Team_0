@@ -24,7 +24,7 @@ export function updateCartBadge() {
 
 async function init() {
   await loadHeaderFooter({
-    headerCallback: () => updateCartBadge()
+    headerCallback: () => updateCartBadge(),
   });
   productDetails.init();
 }
