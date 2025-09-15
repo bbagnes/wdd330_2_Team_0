@@ -256,19 +256,21 @@ button {
 
 /* Cart count badge */
 .cart-count {
+  display: none;
   position: absolute;
-  top: -5px;
-  right: -10px;
-  background-color: #e63946; /* red badge */
+  top: 10%;
+  right: -30%;
+  background: #e53935;
   color: #fff;
-  font-size: 0.75rem;
-  font-weight: bold;
-  line-height: 1;
-  padding: 3px 6px;
   border-radius: 50%;
-  min-width: 18px;
-  text-align: center;
-  display: inline-block;
+  min-width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
 }
 
 /* Hidden state */
