@@ -22,14 +22,6 @@ export function updateCartBadge() {
   else badge.classList.add('hide');
 }
 
-async function init() {
-  await loadHeaderFooter({
-    headerCallback: () => updateCartBadge(),
-  });
-  productDetails.init();
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   updateCartBadge();
 });
-init();
