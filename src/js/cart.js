@@ -1,4 +1,4 @@
-import { getLocalStorage } from './utils.mjs';
+import { getLocalStorage, loadHeaderFooter } from './utils.mjs';
 import { updateCartBadge } from './product.js';
 
 function renderCartContents() {
@@ -99,3 +99,5 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCartBadge(); // ensure correct on initial load
   renderCartContents();
 });
+
+loadHeaderFooter();
