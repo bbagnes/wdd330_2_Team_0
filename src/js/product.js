@@ -13,16 +13,25 @@ productDetails.init();
 // console.log(dataSource.findProductById(productId));
 
 export function updateCartBadge() {
+  console.log("We are getting into the function");
   const cart = getLocalStorage('so-cart') || [];
+  console.log(cart.length)
   const badge = document.querySelector('.cart-count');
-  if (!badge) return;
+  //if (!badge) return;
   badge.textContent = cart.length;
   // hide when empty, show when > 0
   if (cart.length > 0) badge.classList.remove('hide');
   else badge.classList.add('hide');
 }
 
+async function init() {
+  await loadHeaderFooter({
+    headerCallback: () => updateCartBadge()
+  });
+  productDetails.init();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   updateCartBadge();
 });
-loadHeaderFooter();
+init();

@@ -11,5 +11,4 @@ document.addEventListener('DOMContentLoaded', async () => {
   await list.init();
 });
 
-updateCartBadge();
 loadHeaderFooter();

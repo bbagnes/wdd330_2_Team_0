@@ -1,3 +1,4 @@
+import { updateCartBadge } from "./product.js";
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -61,7 +62,7 @@ export function renderListWithTemplate(
   parent.insertAdjacentHTML(position, htmlStrings.join(''));
 }
 
-export function renderWithTemplate(templateFn, parentElement, data, callback) {
+export function renderWithTemplate(templateFn, parentElement, callback) {
   parentElement.innerHTML = templateFn;
   if(callback) {
     callback(data);
@@ -77,7 +78,7 @@ export async function loadTemplate(path) {
 export async function loadHeaderFooter() {
   const headerTemplate = await loadTemplate("../partials/header.html");
   const headerElement = document.querySelector("#main-head");
-  renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(headerTemplate, headerElement, updateCartBadge);
 
   const footerTemplate = await loadTemplate("../partials/footer.html");
   const footerElement = document.querySelector("#main-foot");
