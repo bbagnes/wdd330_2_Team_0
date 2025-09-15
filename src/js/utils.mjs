@@ -65,7 +65,7 @@ export function renderListWithTemplate(
 export function renderWithTemplate(templateFn, parentElement, callback) {
   parentElement.innerHTML = templateFn;
   if(callback) {
-    callback(data);
+    callback();
   }
 }
 
