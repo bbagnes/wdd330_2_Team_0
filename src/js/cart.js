@@ -33,7 +33,7 @@ function cartItemTemplate(item) {
   </a>
   <p class='cart-card__color'>${item.Colors?.[0]?.ColorName ?? ''}</p>
   <p class='cart-card__quantity'>qty: 1</p>
-<p class='cart-card__price'>$${FinalPrice.toFixed(2)}<br>10% Discount Amount: $${discountPrice.toFixed(2)}</p></li>`;
+<p class='cart-card__price'>$${FinalPrice.toFixed(2)}<br>Discount 10%: $${discountPrice.toFixed(2)}</p></li>`;
 
   return newItem;
 }
