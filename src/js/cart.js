@@ -59,7 +59,7 @@ function updateCartFooter(cart) {
 
   // Add 10% discount display
   const discount = total * 0.1;
-  discountEl.textContent = `Discount: ${formatCurrency(total - discount)}`;
+  discountEl.textContent = `Discount: ${formatCurrency(discount)}`;
 }
 
 function getCartTotal(cart) {
