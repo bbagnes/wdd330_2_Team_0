@@ -132,7 +132,6 @@ button {
 }
 
 #cart-badge {
-  display: none;
   position: absolute;
   top: 10%;
   right: -30%;
