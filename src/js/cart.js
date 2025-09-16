@@ -1,7 +1,15 @@
 import { getLocalStorage, loadHeaderFooter } from './utils.mjs';
+import ShoppingCart from './ShoppingCart.mjs';
 import { updateCartBadge } from './product.js';
 
-function renderCartContents() {
+loadHeaderFooter();
+
+const datasource = getLocalStorage('so-cart');
+const element = document.querySelector('.product-list');
+const shopCart = new ShoppingCart(datasource, element);
+shopCart.init();
+
+/*function renderCartContents() {
   const cartItems = getLocalStorage('so-cart');
   if (!Array.isArray(cartItems) || cartItems.length === 0) {
     document.querySelector('.product-list').innerHTML =
@@ -36,7 +44,7 @@ function cartItemTemplate(item) {
 <p class='cart-card__price'>$${FinalPrice.toFixed(2)}<br>Discount 10%: $${discountPrice.toFixed(2)}</p></li>`;
 
   return newItem;
-}
+}*/
 
 function updateCartFooter(cart) {
   const footerEl = document.getElementById('cart-footer');
@@ -93,11 +101,10 @@ function formatCurrency(amount) {
   }
 }
 
-renderCartContents();
+updateCartFooter(datasource);
 
 document.addEventListener('DOMContentLoaded', () => {
   updateCartBadge(); // ensure correct on initial load
-  renderCartContents();
 });
 
 loadHeaderFooter();

@@ -1,53 +1,49 @@
 import { renderListWithTemplate } from './utils.mjs';
 
-function productCardTemplate(product) {
-    // matches the structure in /index.html
-    const id = product?.Id ?? '';
-    const href = `product_pages/index.html?product=${encodeURIComponent(id)}`;
-    const img = product?.Image ?? '';
-    const brand = product?.Brand?.Name ?? '';
-    const name = product?.NameWithoutBrand ?? product?.Name ?? 'Product';
-    const price =
-      typeof product?.FinalPrice === 'number'
-        ? `$${product.FinalPrice.toFixed(2)}`
-        : `$${product?.FinalPrice ?? '0.00'}`;
-  
-    return `<li class="product-card">
-      <a href="${href}">
-        <img src="${img}" alt="Image of ${name}">
-        <h2 class="card__brand">${brand}</h2>
-        <h3 class="card__name">${name}</h3>
-        <p class="product-card__price">${price}</p>
-      </a>
-    </li>`;
+function cartItemTemplate(item) {
+  const FinalPrice = Number(item.FinalPrice); // Simple number conversion
+  const discountPrice = FinalPrice * 0.1; // 10% of FinalPrice
+  const newItem = `<li class='cart-card divider'>
+    <a href='#' class='cart-card__image'>
+        <img
+        src='${item.Image}'
+        alt='${item.Name}'
+        />
+    </a>
+    <a href='#'>
+        <h2 class='card__name'>${item.Name}</h2>
+    </a>
+    <p class='cart-card__color'>${item.Colors?.[0]?.ColorName ?? ''}</p>
+    <p class='cart-card__quantity'>qty: 1</p>
+    <p class='cart-card__price'>$${FinalPrice.toFixed(2)}<br>Discount 10%: -$${discountPrice.toFixed(2)}</p></li>`;
+
+  return newItem;
 }
 
-export default class ProductList {
-    constructor(category, dataSource, listElement) {
+export default class ShoppingCart {
+    constructor(dataSource, listElement) {
       // You passed in this information to make the class as reusable as possible.
       // Being able to define these things when you use the class will make it very flexible
-      this.category = category;
       this.dataSource = dataSource;
       this.listElement = typeof listElement === 'string'
       ? document.querySelector(listElement)
       : listElement;
 
-    this.products = [];
+    this.cart = [];
     }
   
     async init() {
-        this.products = await this.dataSource.getData();
-        this.renderList(this.products);
+        this.cart = this.dataSource;
+        this.renderList(this.cart);
     }
     
-  renderList(products) {
-  if (!this.listElement) return;
-  renderListWithTemplate(
-      productCardTemplate, // your top-level template function
-      this.listElement,    // where to render
-      products,            // data
-      'afterbegin',        // position (default is fine)
-      true                 // clear existing content (replaces innerHTML approach)
-    );
+  renderList(cart) {
+    if (!Array.isArray(this.cart) || this.cart.length === 0) {
+        this.listElement.innerHTML =
+        '<p>Your cart is empty.</p>';
+        return;
+    }
+    const htmlItems = cart.map((item) => cartItemTemplate(item));
+    this.listElement.innerHTML = htmlItems.join('');
   }
 }
