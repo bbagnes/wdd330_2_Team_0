@@ -9,65 +9,32 @@ const element = document.querySelector('.product-list');
 const shopCart = new ShoppingCart(datasource, element);
 shopCart.init();
 
-/*function renderCartContents() {
-  const cartItems = getLocalStorage('so-cart');
-  if (!Array.isArray(cartItems) || cartItems.length === 0) {
-    document.querySelector('.product-list').innerHTML =
-      '<p>Your cart is empty.</p>';
-    updateCartFooter([]); // ensure footer stays hidden
-    updateCartBadge(); // keeps badge hidden/0 when empty
-    return;
-  }
-
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector('.product-list').innerHTML = htmlItems.join('');
-  // Update/show total
-  updateCartFooter(cartItems);
-  updateCartBadge();
-}
-
-function cartItemTemplate(item) {
-  const FinalPrice = Number(item.FinalPrice); // Simple number conversion
-  const discountPrice = FinalPrice * 0.1; // 10% of FinalPrice
-  const newItem = `<li class='cart-card divider'>
-  <a href='#' class='cart-card__image'>
-    <img
-      src='${item.Image}'
-      alt='${item.Name}'
-    />
-  </a>
-  <a href='#'>
-    <h2 class='card__name'>${item.Name}</h2>
-  </a>
-  <p class='cart-card__color'>${item.Colors?.[0]?.ColorName ?? ''}</p>
-  <p class='cart-card__quantity'>qty: 1</p>
-<p class='cart-card__price'>$${FinalPrice.toFixed(2)}<br>Discount 10%: $${discountPrice.toFixed(2)}</p></li>`;
-
-  return newItem;
-}*/
-
 function updateCartFooter(cart) {
   const footerEl = document.getElementById('cart-footer');
   const totalEl = document.getElementById('cart-total');
-  const discountEl = document.getElementById('discount');
+  const discountEl = document.getElementById('cart-discount');
+  const finalEl = document.getElementById('cart-final');
 
   // If the footer HTML doesn't exist yet, do nothing (keeps this file safe to include anywhere)
-  if (!footerEl || !totalEl) return;
+  if (!footerEl || !totalEl || !discountEl || !finalEl) return;
 
   if (!Array.isArray(cart) || cart.length === 0) {
     footerEl.classList.add('hide');
     totalEl.textContent = '$0.00';
-    discountEl.textContent = '';
+    discountEl.textContent = '$0.00';
+    finalEl.textContent = '$0.00';
     return;
   }
 
   const total = getCartTotal(cart);
-  totalEl.textContent = formatCurrency(total);
-  footerEl.classList.remove('hide');
+  const discountTotal = getCartDiscount(cart); // sum of per-item discounts (10%)
+  const finalTotal = Math.max(total - discountTotal, 0);
 
-  // Add 10% discount display
-  const discount = total * 0.1;
-  discountEl.textContent = `Discount: ${formatCurrency(discount)}`;
+  totalEl.textContent = formatCurrency(total);
+  discountEl.textContent = formatCurrency(discountTotal);
+  finalEl.textContent = formatCurrency(finalTotal);
+
+  footerEl.classList.remove('hide');
 }
 
 function getCartTotal(cart) {
@@ -77,6 +44,16 @@ function getCartTotal(cart) {
       item?.FinalPrice ?? item?.price ?? item?.Price ?? item?.ListPrice,
     );
     return sum + price * (Number.isFinite(qty) ? qty : 1);
+  }, 0);
+}
+
+function getCartDiscount(cart) {
+  return cart.reduce((sum, item) => {
+    const qty = Number(item?.quantity ?? 1);
+    const price = coercePrice(
+      item?.FinalPrice ?? item?.price ?? item?.Price ?? item?.ListPrice,
+    );
+    return sum + price * 0.1 * (Number.isFinite(qty) ? qty : 1);
   }, 0);
 }
 
@@ -106,5 +83,3 @@ updateCartFooter(datasource);
 document.addEventListener('DOMContentLoaded', () => {
   updateCartBadge(); // ensure correct on initial load
 });
-
-loadHeaderFooter();
