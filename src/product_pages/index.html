@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <header class="divider">
+    <header class="divider" id="main-head">
       <div class="logo">
         <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
         <a href="../index.html"> Sleep<span class="highlight">Outside</span></a>
@@ -50,6 +50,7 @@
             <!-- <text x="0" y="115" fill="#000000" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">Created by Natalia Woodroffe</text>
             <text x="0" y="120" fill="#000000" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">from the Noun Project</text> -->
           </svg>
+          <span class="cart-count hide"></span>
         </a>
       </div>
     </header>
@@ -66,12 +67,14 @@
         />
         <p id="productPrice" class="product-card__price">$000.99</p>
         <p id="productColor" class="product__color">Color</p>
-        <p id="productDesc" class="product__description">Description</p>
+        <p id="productDesc" class="product__description">
+          Description<br />10% Discount Price
+        </p>
         <div class="product-detail__add">
           <button id="addToCart" data-id="productId">Add to Cart</button>
         </div>
       </section>
     </main>
-    <footer>&copy;NOT a real business</footer>
+    <footer id="main-foot">&copy;NOT a real business</footer>
   </body>
 </html>

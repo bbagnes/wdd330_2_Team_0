@@ -23,6 +23,8 @@ export default class ProductDetails {
         // Update badge right after cart changes
         updateCartBadge();
     }
+
+    
     renderProductDetails() {
         productDetailsTemplate(this.product);
     }
@@ -35,10 +37,18 @@ function productDetailsTemplate(product) {
     const productImage = document.getElementById('productImage'); 
     productImage.src = product.Image; 
     productImage.alt = product.NameWithoutBrand; 
-    
-    document.getElementById('productPrice').textContent = product.FinalPrice; 
+
+    const finalPrice = Number(product.FinalPrice); // Simple number conversion
+    document.getElementById('productPrice').textContent = '$' + finalPrice.toFixed(2); // Basic formatting
+    const descEl = document.getElementById('productDesc');
+    if (descEl) {
+      const discountPrice = finalPrice * 0.10; // 10% of FinalPrice
+      descEl.innerHTML = product.DescriptionHtmlSimple + '<br>10% Discount Price: $' + discountPrice.toFixed(2);
+    }
+
+    // document.getElementById('productPrice').textContent = product.FinalPrice; 
     document.getElementById('productColor').textContent = product.Colors[0].ColorName; 
-    document.getElementById('productDesc').innerHTML = product.DescriptionHtmlSimple; 
+    // document.getElementById('productDesc').innerHTML = product.DescriptionHtmlSimple; 
     document.getElementById('addToCart').dataset.id = product.Id; 
 }
   
