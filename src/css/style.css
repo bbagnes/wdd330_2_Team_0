@@ -296,6 +296,13 @@ button {
   /* ⬅️ push content to the right */
 }
 
+.cart-footer .totals {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* right-align stack */
+  gap: 0.25rem;
+}
+
 .cart-total {
   font-size: 1.125rem;
   font-weight: 600;
@@ -303,6 +310,18 @@ button {
   /* ⬅️ text itself is right-aligned */
   min-width: 180px;
   /* optional: keeps it tidy in a small block */
+}
+
+.cart-discount,
+#cart-discount {
+  color: #e53935; /* red */
+  font-weight: 600;
+  text-align: right;
+}
+
+.cart-final {
+  font-weight: 700;
+  text-align: right;
 }
 
 @media screen and (min-width: 500px) {
