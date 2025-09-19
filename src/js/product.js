@@ -1,4 +1,4 @@
-import { getParam, getLocalStorage } from './utils.mjs';
+import { getParam, getLocalStorage, loadHeaderFooter } from './utils.mjs';
 import ProductData from './ProductData.mjs';
 import ProductDetails from './ProductDetails.mjs';
 
@@ -25,3 +25,5 @@ export function updateCartBadge() {
 document.addEventListener('DOMContentLoaded', () => {
   updateCartBadge();
 });
+
+loadHeaderFooter();
