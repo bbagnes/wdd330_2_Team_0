@@ -62,10 +62,10 @@ export function renderListWithTemplate(
   parent.insertAdjacentHTML(position, htmlStrings.join(''));
 }
 
-export function renderWithTemplate(templateFn, parentElement, callback) {
+export function renderWithTemplate(templateFn, parentElement, data, callback) {
   parentElement.innerHTML = templateFn;
   if(callback) {
-    callback();
+    callback(data);
   }
 }
 
@@ -77,10 +77,10 @@ export async function loadTemplate(path) {
 
 export async function loadHeaderFooter() {
   const headerTemplate = await loadTemplate("../partials/header.html");
-  const headerElement = document.querySelector("#main-head");
+  const headerElement = document.querySelector("#main-header");
   renderWithTemplate(headerTemplate, headerElement, updateCartBadge);
 
   const footerTemplate = await loadTemplate("../partials/footer.html");
-  const footerElement = document.querySelector("#main-foot");
+  const footerElement = document.querySelector("#main-footer");
   renderWithTemplate(footerTemplate, footerElement);
 }
