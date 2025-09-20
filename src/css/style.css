@@ -173,16 +173,27 @@ button {
   padding: 1rem;
 }
 
-.product-list {
+.product-grid {
   display: flex;
   flex-flow: row wrap;
   list-style-type: none;
-  justify-content: center;
+  justify-content: space-evenly;
+  text-align: center;
+  
 }
 
-.product-list a {
+.product-grid a {
   text-decoration: none;
   color: var(--dark-grey);
+}
+
+.product-grid li {
+  padding: 10px;
+  margin: 10px 25px;
+}
+
+.product-grid img {
+  width: 100px;
 }
 
 /* Styles for product lists */
